@@ -19,14 +19,42 @@ if(commander.src) {
     console.log(commander.src);
 }
 */
-process.argv.forEach(function(val, index, array) {
-    files.push(val);
-});
-
+/*
 fs.readdir("./conf", function(err, files) {
     console.log(files);
 });
-
+*/
+/*
+process.argv.forEach(function(val, index, array) {
+    files.push(val);
+});
+*/
+// {{{ 处理HTML文件的代码
+/* ================  分界线，上面是处理程序调用的参数的，下面是处理html文件的 ==============*/
+/*
+ * 解析出HTML文件中的JavaScript代码
+ * @param {string} fileName 要解析的文件名称，必须是.html或.htm结尾的
+ * @return {string} 从文件中提取出来的JavaScript代码，如果没有就返回空字符串
+ */
+function processHTML(fileName) {
+    var script = "", html, matches,
+        ltBegin = 0, gtBegin = 0,
+        endScriptTag = 0;
+    if(fileName.indexOf(".html") === -1 || fileName.indexOf(".htm") === -1) {
+        return script;
+    }
+    html = fs.readFileSync(fileName, "utf-8");
+    ltBegin = html.indexOf("<script", ltBegin);
+    while(ltBegin !== -1) {
+        gtBegin = html.indexOf(">", ltBegin);
+        endScriptTag = html.indexOf("</script>", gtBegin);
+        script += html.substring(gtBegin + 1, endScriptTag).trim();
+        ltBegin = html.indexOf("<script", ltBegin + 1);
+    }
+    return script;
+}
+// }}}
+/*
 for(var i = 2; i < files.length; i++) {
     var fileName = files[i];
     fs.readFile(fileName, function(err, data) {
@@ -49,3 +77,4 @@ for(var i = 2; i < files.length; i++) {
         }
     });
 }
+*/
