@@ -1,5 +1,5 @@
-{
-	"fileExt": [
+module.exports={
+	"fileExt": [//需要检查的文件的后缀
         ".html",
         ".js"
     ],
@@ -7,7 +7,17 @@
     "hint":{  
     	"jquery":true
     },
-    "global":{ 
-    	"nuit":true
+    "global":{ //全局变量
+    	"nuit":true,
+    	"baidu":true
+    	"Ext":true,
+    	"T":true,
+    	"$":true,
+    	"jQuery":true,
+    	"Noah":true,
+    	"noah":true,
+    	"Backbone":true,
+    	"WdatePicker":true,
+    	"_":true
     }
-}
+};
