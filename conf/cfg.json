@@ -1,8 +1,13 @@
 {
-    options: {
-
+	"fileExt": [
+        ".html",
+        ".js"
+    ],
+    "ignoreFiles":["jquery","nuit"],
+    "hint":{  
+    	"jquery":true
     },
-    ignoreFiles: [
-        
-    ]
+    "global":{ 
+    	"nuit":true
+    }
 }
