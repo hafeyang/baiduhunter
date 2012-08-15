@@ -80,26 +80,10 @@ function beginHint() {
 
             for(var j = 0; j < errors.length; j++) {
                 var error = errors[j];
-                console.log(JSON.stringify(error));
+                //console.log(JSON.stringify(error));
             }
         }
     });
 }
-//console.log(config.hint);
+console.log(files.length);
 beginHint();
-/*
-for(var i = 2; i < files.length; i++) {
-    var fileName = files[i];
-    fs.readFile(fileName, function(err, data) {
-        if(err) {
-            throw err;
-        }
-        if(jshint(data.toString("utf-8"), { onevar: false })) {
-            console.log("File " + fileName + "has no error.");
-        } else {
-            console.log("Error in file " + fileName);
-            console.log('');
-
-    });
-}
-*/
