@@ -1,6 +1,13 @@
 {
-
-    "ignoreFiles": [
-        
-    ]
+	"fileExt": [//需要检查的文件的后缀
+        ".html",
+        ".js"
+    ],
+    "ignoreFiles":["jquery","nuit"],
+    "hint":{  //hint的配置项，详见http://www.jshint.com/docs/
+    	"jquery":true
+    },
+    "global":{ //全局变量
+    	"nuit":true
+    }
 }
