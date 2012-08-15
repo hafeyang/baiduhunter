@@ -4,6 +4,7 @@ module.exports={
         ".js"
     ],
     "ignoreFiles":[//忽略的文件，支持正则
+        ".svn",
     	"jquery",
         "json2",
         "tangram",

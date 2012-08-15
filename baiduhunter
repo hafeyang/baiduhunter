@@ -23,30 +23,22 @@ if(commander.conf) {
 }
 fileNameFilter = new RegExp(config.ignoreFiles.join("|"));
 fileExtFilter = new RegExp(config.fileExt.join("|"));
-function recursiveFindAllFile(uri) {
-    var stat = fs.lstatSync(uri);
-    console.log(path.resolve(uri));
-    if(stat.isDirectory()) {
-        
-    } else {
-        if(!fileNameFilter.test(uri) && fileExtFilter.test(uri)) {
-            files.push(path.resolve(uri));
-        }
-    }
-}
-if(commander.src) {
-    // var stat = fs.lstatSync(commander.src);
-    recursiveFindAllFile(commander.src);
-    /*
-    if(stat.isDirectory()) {
-        var tempFiles = fs.readdirSync(commander.src);
-        for(var i = 0; i < tempFiles.length; i++) {
-            if(!fileNameFilter.test(tempFiles[i]) && fileExtFilter.test(tempFiles[i])) {
-                files.push(commander.src + tempFiles[i]);
+function recursiveFindAllFile(accm, dir) {
+    var files = fs.readdirSync(dir);
+    files.forEach(function(file, index, arr) {
+        var pathName = path.resolve(dir + "/" + file),
+            stat = fs.lstatSync(pathName);
+        if(stat.isDirectory()) {
+            recursiveFindAllFile(accm, pathName);
+        } else {
+            if(!fileNameFilter.test(file) && fileExtFilter.test(file)) {
+                accm.push(pathName);    
             }
         }
-    }
-    */
+    });
+}
+if(commander.src) {
+    recursiveFindAllFile(files, commander.src);
 }
 // }}}
 // {{{ 处理HTML文件的代码 processHTML
@@ -82,10 +74,14 @@ function beginHint() {
         } else {
             scripts = fs.readFileSync(val, "utf-8");
         }
+        if(!jshint(scripts)) {
+            console.log("error");            
+        }
     });
 }
-console.log(files);
-// beginHint();
+//console.log(config.hint);
+//console.log(config.global);
+beginHint();
 /*
 for(var i = 2; i < files.length; i++) {
     var fileName = files[i];
