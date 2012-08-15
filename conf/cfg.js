@@ -3,33 +3,50 @@ module.exports={
         ".html",
         ".js"
     ],
-    "ignoreFiles":[//忽略的文件，支持正则
-    	"jquery",
-    	"nuit"
-    ],
+    "ignoreFiles":[//忽略的文件，支持正则，如果文件的全路径中包含该正则，该文件不做检查
+        "*svn*",
+        "*jquery*",
+        "*fly*",
+        "*ext*",
+        "*tangram*",
+        "*nuit*",
+        "*backbone*",
+        "*underscore*",
+        "*json2*",
+        "*highcharts*",
+        "*highstock*",
+        "*knockout*",
+        "*raphael*",
+        "*css*",
+        "*WdatePicker*",
+        "*My97DatePicker*",
+        "*ZeroClipboard*",
+        "*jqGrid*",
+        "*/data*"
+     ],
     "hint":{  //hint的配置项，详见http://www.jshint.com/docs/
     	asi         : true, // if automatic semicolon insertion should be tolerated
         bitwise     : true, // if bitwise operators should not be allowed
-        boss        : true, // if advanced usage of assignments should be allowed
+        boss        : false, // if advanced usage of assignments should be allowed
         browser     : true, // if the standard browser globals should be predefined
         camelcase   : true, // if identifiers should be required in camel case
-        couch       : true, // if CouchDB globals should be predefined
-        curly       : true, // if curly braces around all blocks should be required
-        debug       : true, // if debugger statements should be allowed
+        couch       : false, // if CouchDB globals should be predefined
+        curly       : false, // if curly braces around all blocks should be required
+        debug       : false, // if debugger statements should be allowed
         devel       : true, // if logging globals should be predefined (console,
                             // alert, etc.)
         dojo        : true, // if Dojo Toolkit globals should be predefined
-        eqeqeq      : true, // if === should be required
-        eqnull      : true, // if == null comparisons should be tolerated
-        es5         : true, // if ES5 syntax should be allowed
-        esnext      : true, // if es.next specific syntax should be allowed
+        eqeqeq      : false, // if === should be required
+        eqnull      : false, // if == null comparisons should be tolerated
+        es5         : false, // if ES5 syntax should be allowed
+        esnext      : false, // if es.next specific syntax should be allowed
         evil        : true, // if eval should be allowed
         expr        : true, // if ExpressionStatement should be allowed as Programs
         forin       : true, // if for in statements must filter
         funcscope   : true, // if only function scope should be used for scope tests
         globalstrict: true, // if global "use strict"; should be allowed (also
                             // enables 'strict')
-        immed       : true, // if immediate invocations must be wrapped in parens
+        immed       : false, // if immediate invocations must be wrapped in parens
         iterator    : true, // if the `__iterator__` property should be allowed
         jquery      : true, // if jQuery globals should be predefined
         lastsemic   : true, // if semicolons may be ommitted for the trailing
@@ -54,7 +71,7 @@ module.exports={
         onevar      : true, // if only one var statement per function should be
                             // allowed
         onecase     : true, // if one case switch statements should be allowed
-        passfail    : true, // if the scan should stop on first error
+        passfail    : false, // if the scan should stop on first error
         plusplus    : true, // if increment/decrement should not be allowed
         proto       : true, // if the `__proto__` property should be allowed
         prototypejs : true, // if Prototype and Scriptaculous globals should be
@@ -69,11 +86,11 @@ module.exports={
         shadow      : true, // if variable shadowing should be tolerated
         smarttabs   : true, // if smarttabs should be tolerated
                             // (http://www.emacswiki.org/emacs/SmartTabs)
-        strict      : true, // require the "use strict"; pragma
+        strict      : false, // require the "use strict"; pragma
         sub         : true, // if all forms of subscript notation are tolerated
         supernew    : true, // if `new function () { ... };` and `new Object;`
                             // should be tolerated
-        trailing    : true, // if trailing whitespace rules apply
+        trailing    : false, // if trailing whitespace rules apply
         validthis   : true, // if 'this' inside a non-constructor function is valid.
                             // This is a function scoped option only.
         withstmt    : true, // if with statements should be allowed
@@ -94,5 +111,22 @@ module.exports={
     	"Backbone":true,
     	"WdatePicker":true,
     	"_":true
+    },
+    errordef:{ //定义错误级别，在生成报表前可以过滤，调整某些错误的级别,级别
+        "Unsafe character":"ignore",
+        "Mixed spaces and tabs":"warning",
+        "Too many var statements":"warning",
+        "Unexpected dangling":"ignore",
+        "to compare with":"ignore",
+        "is not defined":"ignore",
+        "Unexpected dangling":"ignore",
+        "A constructor name should start with an uppercase letter":"warning",
+        "Expected an assignment or function call and instead saw an expression":"warning",
+        "Mixed spaces and tabs":"ignore",
+        "Missing semicolon":"warning",
+        "console":"error",
+        "alert":"warning",
+        "top.control":"warning",
+        "timestamp missed":"warning"
     }
 };
