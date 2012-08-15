@@ -112,7 +112,7 @@ module.exports={
     	"WdatePicker":true,
     	"_":true
     },
-    errordef:{ //定义错误级别，在生成报表前可以过滤，调整某些错误的级别,级别
+    errordef:{ //定义错误级别，在生成报表前可以过滤，调整某些错误的级别,级别有error,warning,ignore
         "Unsafe character":"ignore",
         "Mixed spaces and tabs":"warning",
         "Too many var statements":"warning",
