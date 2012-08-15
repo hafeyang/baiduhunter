@@ -101,7 +101,7 @@ module.exports={
     },
     "global":{ //全局变量
     	"nuit":true,
-    	"baidu":true
+    	"baidu":true,
     	"Ext":true,
     	"T":true,
     	"$":true,

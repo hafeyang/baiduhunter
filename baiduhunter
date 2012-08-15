@@ -3,9 +3,10 @@
 var fs = require("fs"),
     jshint = require("./lib/jshint").JSHINT,
     commander = require("./lib/commander"),
-    files = [], dir, options = null;
+    config = require("./conf/cfg"),
+    fileNameFilter = null, fileExtFilter = null,
+    files = [], dir;
 
-var confFileName = "./conf/cfg.json";
 // {{{ commander.js处理命令行参数
 /* 
  * 解析命令行参数
@@ -17,12 +18,22 @@ commander
     .parse(process.argv);
 
 if(commander.conf) {
-    confFileName = commander.conf;
+    config = require(commander.conf);
 }
+fileNameFilter = new RegExp(config.ignoreFiles.join("|"));
+fileExtFilter = new RegExp(config.fileExt.join("|"));
 if(commander.src) {
-    files = fs.readdirSync(commander.src);
-    for(var i = 0; i < files.length 
+    var stat = fs.lstatSync(commander.src);
+    if(stat.isDirectory()) {
+        var tempFiles = fs.readdirSync(commander.src);
+        for(var i = 0; i < tempFiles.length; i++) {
+            if(!fileNameFilter.test(tempFiles[i]) && fileExtFilter.test(tempFiles[i])) {
+                files.push(commander.src + tempFiles[i]);
+            }
+        }
+    }
 }
+console.log(files);
 // }}}
 // {{{ 处理参数
 /*
@@ -35,11 +46,6 @@ process.argv.forEach(function(val, index, array) {
     }
 });
 */
-function processConf(fileName) {
-    var conf = fs.readFileSync(fileName, "utf-8");
-    options = JSON.parse(conf);
-}
-processConf(confFileName);
 // }}}
 // {{{ 处理HTML文件的代码
 /* ================  分界线，上面是处理程序调用的参数的，下面是处理html文件的 ==============*/
