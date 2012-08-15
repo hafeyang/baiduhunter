@@ -5,6 +5,10 @@ module.exports={
     ],
     "ignoreFiles":[//忽略的文件，支持正则
     	"jquery",
+        "json2",
+        "tangram",
+        "backbone",
+        "underscore",
     	"nuit"
     ],
     "hint":{  //hint的配置项，详见http://www.jshint.com/docs/
@@ -84,7 +88,7 @@ module.exports={
     },
     "global":{ //全局变量
     	"nuit":true,
-    	"baidu":true
+    	"baidu":true,
     	"Ext":true,
     	"T":true,
     	"$":true,
