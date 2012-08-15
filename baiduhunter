@@ -4,8 +4,9 @@ var fs = require("fs"),
     jshint = require("./lib/jshint").JSHINT,
     commander = require("./lib/commander"),
     config = require("./conf/cfg"),
+    path = require("path"),
     fileNameFilter = null, fileExtFilter = null,
-    files = [], dir;
+    files = [];
 
 // {{{ commander.js处理命令行参数
 /* 
@@ -22,8 +23,21 @@ if(commander.conf) {
 }
 fileNameFilter = new RegExp(config.ignoreFiles.join("|"));
 fileExtFilter = new RegExp(config.fileExt.join("|"));
+function recursiveFindAllFile(uri) {
+    var stat = fs.lstatSync(uri);
+    console.log(path.resolve(uri));
+    if(stat.isDirectory()) {
+        
+    } else {
+        if(!fileNameFilter.test(uri) && fileExtFilter.test(uri)) {
+            files.push(path.resolve(uri));
+        }
+    }
+}
 if(commander.src) {
-    var stat = fs.lstatSync(commander.src);
+    // var stat = fs.lstatSync(commander.src);
+    recursiveFindAllFile(commander.src);
+    /*
     if(stat.isDirectory()) {
         var tempFiles = fs.readdirSync(commander.src);
         for(var i = 0; i < tempFiles.length; i++) {
@@ -32,22 +46,10 @@ if(commander.src) {
             }
         }
     }
+    */
 }
-console.log(files);
 // }}}
-// {{{ 处理参数
-/*
-process.argv.forEach(function(val, index, array) {
-    if(index > 1) {
-        files = fs.readdirSync(val);
-        for(var i = 0; i < files.length; i++) {
-            files[i] = val + files[i];
-        }
-    }
-});
-*/
-// }}}
-// {{{ 处理HTML文件的代码
+// {{{ 处理HTML文件的代码 processHTML
 /* ================  分界线，上面是处理程序调用的参数的，下面是处理html文件的 ==============*/
 /*
  * 解析出HTML文件中的JavaScript代码
@@ -72,8 +74,18 @@ function processHTML(fileName) {
     return script;
 }
 // }}}
-// {{{ 处理文件列表
-// }}}
+function beginHint() {
+    files.forEach(function(val, index, arr) {
+        var scripts = null;
+        if(val.indexOf(".html") !== -1) {
+            scripts = processHTML(val);
+        } else {
+            scripts = fs.readFileSync(val, "utf-8");
+        }
+    });
+}
+console.log(files);
+// beginHint();
 /*
 for(var i = 2; i < files.length; i++) {
     var fileName = files[i];
