@@ -24,11 +24,9 @@ fs.readdir("./conf", function(err, files) {
     console.log(files);
 });
 */
-/*
 process.argv.forEach(function(val, index, array) {
     files.push(val);
 });
-*/
 // {{{ 处理HTML文件的代码
 /* ================  分界线，上面是处理程序调用的参数的，下面是处理html文件的 ==============*/
 /*
@@ -54,7 +52,6 @@ function processHTML(fileName) {
     return script;
 }
 // }}}
-/*
 for(var i = 2; i < files.length; i++) {
     var fileName = files[i];
     fs.readFile(fileName, function(err, data) {
@@ -77,4 +74,3 @@ for(var i = 2; i < files.length; i++) {
         }
     });
 }
-*/
