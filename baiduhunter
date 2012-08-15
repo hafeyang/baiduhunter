@@ -21,7 +21,7 @@ commander
 if(commander.conf) {
     config = require(commander.conf);
 }
-fileNameFilter = new RegExp(config.ignoreFiles.join("|"));
+fileNameFilter = new RegExp("(" + config.ignoreFiles.join("|")+ ")");
 fileExtFilter = new RegExp(config.fileExt.join("|"));
 function recursiveFindAllFile(accm, dir) {
     var files = fs.readdirSync(dir);
@@ -31,7 +31,7 @@ function recursiveFindAllFile(accm, dir) {
         if(stat.isDirectory()) {
             recursiveFindAllFile(accm, pathName);
         } else {
-            if(!fileNameFilter.test(file) && fileExtFilter.test(file)) {
+            if(fileExtFilter.test(pathName) && !fileNameFilter.test(pathName)) {
                 accm.push(pathName);    
             }
         }
@@ -48,10 +48,14 @@ if(commander.src) {
  * @param {string} fileName 要解析的文件名称，必须是.html或.htm结尾的
  * @return {string} 从文件中提取出来的JavaScript代码，如果没有就返回空字符串
  */
+function findnl(text) {
+    var index = 0;
+}
 function processHTML(fileName) {
     var script = "", html, matches,
         ltBegin = 0, gtBegin = 0,
-        endScriptTag = 0;
+        endScriptTag = 0, nlNumber = 0,
+        htmlFragment = "";
     if(fileName.indexOf(".html") === -1 || fileName.indexOf(".htm") === -1) {
         return script;
     }
@@ -59,6 +63,12 @@ function processHTML(fileName) {
     ltBegin = html.indexOf("<script", ltBegin);
     while(ltBegin !== -1) {
         gtBegin = html.indexOf(">", ltBegin);
+        htmlFragment = html.substring(endScriptTag, gtBegin + 2)
+        nlNumber = htmlFragment.match(/\n/gm).length;
+        for(var i = 0; i < nlNumber; i++) {
+            script += "\n";
+        }
+        findnl(htmlFragment);
         endScriptTag = html.indexOf("</script>", gtBegin);
         script += html.substring(gtBegin + 1, endScriptTag).trim();
         ltBegin = html.indexOf("<script", ltBegin + 1);
@@ -74,16 +84,16 @@ function beginHint() {
         } else {
             scripts = fs.readFileSync(val, "utf-8");
         }
-        if(!jshint(scripts)) {
+        if(!jshint(scripts, config.hint, config.global)) {
             var out = jshint.data(),
                 errors = out.errors;
 
             for(var j = 0; j < errors.length; j++) {
                 var error = errors[j];
-                //console.log(JSON.stringify(error));
+                console.log(JSON.stringify(error));
+                //console.log(error.line + ": " + error.character);
             }
         }
     });
 }
-console.log(files.length);
 beginHint();

@@ -1,7 +1,7 @@
 module.exports={
 	"fileExt": [//需要检查的文件的后缀
-        ".html",
-        ".js"
+        "\.html$",
+        "\.js$"
     ],
     "ignoreFiles":[//忽略的文件，支持正则，如果文件的全路径中包含该正则，该文件不做检查
         "svn",
@@ -22,6 +22,7 @@ module.exports={
         "My97DatePicker",
         "ZeroClipboard",
         "jqGrid",
+        "noah",
         "\/data"
      ],
     "hint":{  //hint的配置项，详见http://www.jshint.com/docs/
@@ -56,6 +57,7 @@ module.exports={
         laxcomma    : true, // if line breaks should not be checked around commas
         loopfunc    : true, // if functions should be allowed to be defined within
                             // loops
+        maxerr      : 50000,
         mootools    : true, // if MooTools globals should be predefined
         multistr    : true, // allow multiline strings
         newcap      : true, // if constructor names must be capitalized
