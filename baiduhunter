@@ -3,9 +3,13 @@
 var fs = require("fs"),
     jshint = require("./lib/jshint").JSHINT,
     commander = require("./lib/commander"),
-    files = [];
-/*
-解析命令行参数
+    files = [], dir, options = null;
+
+var confFileName = "./conf/cfg.json";
+// {{{ commander.js处理命令行参数
+/* 
+ * 解析命令行参数
+ */
 commander
     .version("0.0.1")
     .option("-c --conf <string>", "Configuration file")
@@ -13,20 +17,30 @@ commander
     .parse(process.argv);
 
 if(commander.conf) {
-    console.log(commander.conf);
+    confFileName = commander.conf;
 }
 if(commander.src) {
-    console.log(commander.src);
+    files = fs.readdirSync(commander.src);
+    for(var i = 0; i < files.length 
 }
-*/
+// }}}
+// {{{ 处理参数
 /*
-fs.readdir("./conf", function(err, files) {
-    console.log(files);
+process.argv.forEach(function(val, index, array) {
+    if(index > 1) {
+        files = fs.readdirSync(val);
+        for(var i = 0; i < files.length; i++) {
+            files[i] = val + files[i];
+        }
+    }
 });
 */
-process.argv.forEach(function(val, index, array) {
-    files.push(val);
-});
+function processConf(fileName) {
+    var conf = fs.readFileSync(fileName, "utf-8");
+    options = JSON.parse(conf);
+}
+processConf(confFileName);
+// }}}
 // {{{ 处理HTML文件的代码
 /* ================  分界线，上面是处理程序调用的参数的，下面是处理html文件的 ==============*/
 /*
@@ -52,13 +66,16 @@ function processHTML(fileName) {
     return script;
 }
 // }}}
+// {{{ 处理文件列表
+// }}}
+/*
 for(var i = 2; i < files.length; i++) {
     var fileName = files[i];
     fs.readFile(fileName, function(err, data) {
         if(err) {
             throw err;
         }
-        if(jshint(data.toString("utf-8"))) {
+        if(jshint(data.toString("utf-8"), { onevar: false })) {
             console.log("File " + fileName + "has no error.");
         } else {
             console.log("Error in file " + fileName);
@@ -74,3 +91,4 @@ for(var i = 2; i < files.length; i++) {
         }
     });
 }
+*/
