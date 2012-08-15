@@ -75,12 +75,17 @@ function beginHint() {
             scripts = fs.readFileSync(val, "utf-8");
         }
         if(!jshint(scripts)) {
-            console.log("error");            
+            var out = jshint.data(),
+                errors = out.errors;
+
+            for(var j = 0; j < errors.length; j++) {
+                var error = errors[j];
+                console.log(JSON.stringify(error));
+            }
         }
     });
 }
 //console.log(config.hint);
-//console.log(config.global);
 beginHint();
 /*
 for(var i = 2; i < files.length; i++) {
@@ -95,14 +100,6 @@ for(var i = 2; i < files.length; i++) {
             console.log("Error in file " + fileName);
             console.log('');
 
-            var out = jshint.data(),
-                errors = out.errors;
-
-            for(var j = 0; j < errors.length; j++) {
-                var error = errors[j];
-                console.log(error.line + ": " + error.character + " -> " + error.reason + " -> " + error.evidence);
-            }
-        }
     });
 }
 */
