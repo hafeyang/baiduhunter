@@ -58,7 +58,7 @@ for(var i = 2; i < files.length; i++) {
         if(err) {
             throw err;
         }
-        if(jshint(data.toString("utf-8"))) {
+        if(jshint(data.toString("utf-8"), { onevar: false })) {
             console.log("File " + fileName + "has no error.");
         } else {
             console.log("Error in file " + fileName);

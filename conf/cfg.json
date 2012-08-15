@@ -1,6 +1,8 @@
 {
+    options: {
 
-    "ignoreFiles": [
+    },
+    ignoreFiles: [
         
     ]
 }
