@@ -1,0 +1,51 @@
+#!/usr/bin/env node
+
+var fs = require("fs"),
+    jshint = require("./lib/jshint").JSHINT,
+    commander = require("./lib/commander"),
+    files = [];
+/*
+解析命令行参数
+commander
+    .version("0.0.1")
+    .option("-c --conf <string>", "Configuration file")
+    .option("-s --src <string>", "Source to be check, file or dir")
+    .parse(process.argv);
+
+if(commander.conf) {
+    console.log(commander.conf);
+}
+if(commander.src) {
+    console.log(commander.src);
+}
+*/
+process.argv.forEach(function(val, index, array) {
+    files.push(val);
+});
+
+fs.readdir("./conf", function(err, files) {
+    console.log(files);
+});
+
+for(var i = 2; i < files.length; i++) {
+    var fileName = files[i];
+    fs.readFile(fileName, function(err, data) {
+        if(err) {
+            throw err;
+        }
+        if(jshint(data.toString("utf-8"))) {
+            console.log("File " + fileName + "has no error.");
+        } else {
+            console.log("Error in file " + fileName);
+            console.log('');
+
+            var out = jshint.data(),
+                errors = out.errors;
+
+            for(var j = 0; j < errors.length; j++) {
+                var error = errors[j];
+                console.log(error.line + ": " + error.character + " -> " + error.reason + " -> " + error.evidence);
+            }
+        }
+    });
+}
