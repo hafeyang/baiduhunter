@@ -129,6 +129,7 @@ module.exports={
         "console":"error",
         "alert":"warning",
         "top.control":"warning",
-        "timestamp missed":"warning"
+        "timestamp missed":"warning",
+        "Missing space after": "warning"
     }
 };
