@@ -204,7 +204,7 @@ table.note tr.text td {
     font-size:11px;
 }
 </style>
-<title>JsHunter Check Report</title>
+<title><%- reportName %> Hunter Report</title>
 
 <script type="text/javascript">
 
@@ -284,7 +284,7 @@ function openwindow(title, id, type)
 <body>
 	<table class="report_caption">
 		<tr>
-			<td>JSHunter Report</td>
+            <td><%- reportName %> Hunter Report</td>
 		</tr>
 	</table>
 	<table class="separator_line" cellspacing="0"><tr><td></td></tr></table>

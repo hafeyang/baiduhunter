@@ -65,8 +65,9 @@ if(commander.src) {
     }*/
     reportName = reportName.substring(reportName.lastIndexOf("/") + 1);
     if(version) {
-        reportName += "-" + version.replace(/\./gi, "_");
+        reportName += "-" + version.replace(/\./gi, "_").replace(/\n/, "");
     }
+    output.reportName = reportName;
     console.log(reportName);
 
     recursiveFindAllFile(files, commander.src);
@@ -168,8 +169,8 @@ function classifyErrors(tplObj, errors) {
 function toReport() {
     var result = beginHint(),
         reportHTML = template(result);
-    fs.writeFileSync(reportName, reportHTML, "utf-8");
+    fs.writeFileSync(reportName + ".html", reportHTML, "utf-8");
     console.log("过滤后检查文件数：" + files.length);
-    console.log("生成文件路径：" + path.resolve("./" + reportName+ ".html"));
+    console.log("生成文件路径：" + path.resolve("./" + reportName + ".html"));
 }
 toReport();
