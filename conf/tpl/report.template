@@ -324,18 +324,18 @@ function openwindow(title, id, type)
 <table cellspacing="0" cellpadding="0" class="caption">
     <tr><td class="text result_PASS">
             <%= index+1 %>&nbsp;
-            <a OnClick="javascript:toggle('file_<%- obj.fileName %>');"><%- obj.fileName %></a>
+            <a OnClick="javascript:toggle('file_<%= index %>');"><%- obj.fileName %></a>
             <span style="float: right;">error: <%- obj.error %>&nbsp;warning: <%- obj.warning %>&nbsp;ignored: <%- obj.ignored %></span>
     </td></tr>
 </table>
 <table class="separator"><tr><td></td></tr></table>
-<table cellspacing="0" cellpadding="0" class="table_wide" id="file_<%- obj.fileName %>" style="display:none" border="1">
+<table cellspacing="0" cellpadding="0" class="table_wide" id="file_<%= index %>" style="display:none" border="1">
     <% 
         _.each(obj.errors, function(error, index) {
-            if(!!error && error.id !== "ignore") {
+            if(!!error && error.level !== "ignore") {
     %>
 	<tr>
-        <th><%- error.id %></th>
+        <th><%- error.level %></th>
         <th><%- error.line %>: <%- error.character %></th>
 		<th><%- error.evidence %></th>
 		<th><%- error.reason %></th>

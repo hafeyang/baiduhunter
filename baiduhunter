@@ -5,9 +5,10 @@ var fs = require("fs"),
     commander = require("./lib/commander"),
     config = require("./conf/cfg"),
     path = require("path"),
+    cc = require("./customcheck"),
     _ = require("./lib/underscore"),
     fileNameFilter = null, fileExtFilter = null,
-    template, files = [];
+    template, files = [], totalFiles = 0;
 
 var output = {
     error: 0,
@@ -40,6 +41,7 @@ function recursiveFindAllFile(accm, dir) {
         if(stat.isDirectory()) {
             recursiveFindAllFile(accm, pathName);
         } else {
+            totalFiles++;
             if(fileExtFilter.test(pathName) && !fileNameFilter.test(pathName)) {
                 accm.push(pathName);    
             }
@@ -50,6 +52,7 @@ if(commander.src) {
     var templateHTML = fs.readFileSync("./conf/tpl/report.template", "utf-8");
     template = _.template(templateHTML);
     recursiveFindAllFile(files, commander.src);
+    console.log("文件总数：" + totalFiles);
 }
 // }}}
 // {{{ 处理HTML文件的代码 processHTML
@@ -104,6 +107,7 @@ function beginHint() {
                 errors = out.errors;
             classifyErrors(tplObj, errors);
         }
+        console.log("error: " + tplObj.error + " warning: " + tplObj.warning + " ignored: " + tplObj.ignored + ". file: " + val);
         output.files.push(tplObj);
     });
     return output;
@@ -114,34 +118,35 @@ function classifyErrors(tplObj, errors) {
     for(i = 0, length = errors.length; i < length; i++) {
         error = errors[i];
         if(!!error) {
-            errors[i].id = "error";
+            errors[i].level = "error";
             for(key in errorFilter) {
-                if(error.reason.indexOf(key) > -1) {
-                    error.id = errorFilter[key];
+                if(error.raw && error.raw.indexOf(key) > -1) {
+                    error.level = errorFilter[key];
                     break;
                 }
             }
-            if(error.id === "warning") {
+            if(error.level === "warning") {
                 output.warning++;
                 tplObj.warning++;
             }
-            if(error.id === "error") {
+            if(error.level === "error") {
                 output.error++;
                 tplObj.error++;
             }
-            if(error.id === "ignore") {
+            if(error.level === "ignore") {
                 output.ignored++;
                 output.ignored++;
             }
             output.total++;
         }
     }
-
     tplObj.errors = errors;
 }
 function toReport() {
-    var result = beginHint();
+    var result = beginHint(),
         reportHTML = template(result);
     fs.writeFileSync("./report.html", reportHTML, "utf-8");
+    console.log("过滤后检查文件数：" + files.length);
+    console.log("生成文件路径：" + path.resolve("./report.html"));
 }
 toReport();

@@ -1,0 +1,68 @@
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"function submitRequest(){","line":76,"character":25,"a":")","reason":"Missing space after ')'."}
+{"id":"(error)","raw":"Too many var statements.","evidence":"    var result = checkEmptyByIds(selectArr, true);","line":79,"character":9,"reason":"Too many var statements."}
+{"id":"(error)","raw":"Use '{a}' to compare with '{b}'.","evidence":"    if (result != true) {","line":80,"character":16,"a":"!==","b":"true","reason":"Use '!==' to compare with 'true'."}
+{"id":"(error)","raw":"Too many var statements.","evidence":"    var opStr = '';","line":84,"character":9,"reason":"Too many var statements."}
+{"id":"(error)","raw":"Too many var statements.","evidence":"    for (var i=0; i<selectArr.length ;i++ ){","line":85,"character":14,"reason":"Too many var statements."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"    for (var i=0; i<selectArr.length ;i++ ){","line":85,"character":15,"a":"i","reason":"Missing space after 'i'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"    for (var i=0; i<selectArr.length ;i++ ){","line":85,"character":16,"a":"=","reason":"Missing space after '='."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"    for (var i=0; i<selectArr.length ;i++ ){","line":85,"character":20,"a":"i","reason":"Missing space after 'i'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"    for (var i=0; i<selectArr.length ;i++ ){","line":85,"character":21,"a":"<","reason":"Missing space after '<'."}
+{"id":"(error)","raw":"Unexpected use of '{a}'.","evidence":"    for (var i=0; i<selectArr.length ;i++ ){","line":85,"character":40,"a":"++","reason":"Unexpected use of '++'."}
+{"id":"(error)","raw":"Unexpected space after '{a}'.","evidence":"    for (var i=0; i<selectArr.length ;i++ ){","line":85,"character":42,"a":"++","reason":"Unexpected space after '++'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"    for (var i=0; i<selectArr.length ;i++ ){","line":85,"character":44,"a":")","reason":"Missing space after ')'."}
+{"id":"(error)","raw":"Too many var statements.","evidence":"        var tmp = document.getElementById(selectArr[i]);","line":86,"character":13,"reason":"Too many var statements."}
+{"id":"(error)","raw":"Use '{a}' to compare with '{b}'.","evidence":"        if (tmp == null){","line":87,"character":17,"a":"===","b":"null","reason":"Use '===' to compare with 'null'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"        if (tmp == null){","line":87,"character":25,"a":")","reason":"Missing space after ')'."}
+{"id":"(error)","raw":"Too many var statements.","evidence":"        var str = tmp.value;","line":90,"character":13,"reason":"Too many var statements."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"            window.parent.popLayer.alert('流程参与人填写错误','WARNING');","line":92,"character":54,"a":",","reason":"Missing space after ','."}
+{"id":"(error)","raw":"Too many var statements.","evidence":"        var tmpArr = str.split(';');","line":97,"character":13,"reason":"Too many var statements."}
+{"id":"(error)","raw":"Too many var statements.","evidence":"        for (var j=0;j<tmpArr.length ;j++ ){","line":98,"character":18,"reason":"Too many var statements."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"        for (var j=0;j<tmpArr.length ;j++ ){","line":98,"character":19,"a":"j","reason":"Missing space after 'j'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"        for (var j=0;j<tmpArr.length ;j++ ){","line":98,"character":20,"a":"=","reason":"Missing space after '='."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"        for (var j=0;j<tmpArr.length ;j++ ){","line":98,"character":23,"a":"j","reason":"Missing space after 'j'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"        for (var j=0;j<tmpArr.length ;j++ ){","line":98,"character":24,"a":"<","reason":"Missing space after '<'."}
+{"id":"(error)","raw":"Unexpected use of '{a}'.","evidence":"        for (var j=0;j<tmpArr.length ;j++ ){","line":98,"character":40,"a":"++","reason":"Unexpected use of '++'."}
+{"id":"(error)","raw":"Unexpected space after '{a}'.","evidence":"        for (var j=0;j<tmpArr.length ;j++ ){","line":98,"character":42,"a":"++","reason":"Unexpected space after '++'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"        for (var j=0;j<tmpArr.length ;j++ ){","line":98,"character":44,"a":")","reason":"Missing space after ')'."}
+{"id":"(error)","raw":"Too many var statements.","evidence":"            for (var k = j+1; k<tmpArr.length ;k++ ){","line":99,"character":22,"reason":"Too many var statements."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"            for (var k = j+1; k<tmpArr.length ;k++ ){","line":99,"character":27,"a":"j","reason":"Missing space after 'j'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"            for (var k = j+1; k<tmpArr.length ;k++ ){","line":99,"character":28,"a":"+","reason":"Missing space after '+'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"            for (var k = j+1; k<tmpArr.length ;k++ ){","line":99,"character":32,"a":"k","reason":"Missing space after 'k'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"            for (var k = j+1; k<tmpArr.length ;k++ ){","line":99,"character":33,"a":"<","reason":"Missing space after '<'."}
+{"id":"(error)","raw":"Unexpected use of '{a}'.","evidence":"            for (var k = j+1; k<tmpArr.length ;k++ ){","line":99,"character":49,"a":"++","reason":"Unexpected use of '++'."}
+{"id":"(error)","raw":"Unexpected space after '{a}'.","evidence":"            for (var k = j+1; k<tmpArr.length ;k++ ){","line":99,"character":51,"a":"++","reason":"Unexpected space after '++'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"            for (var k = j+1; k<tmpArr.length ;k++ ){","line":99,"character":53,"a":")","reason":"Missing space after ')'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"                    window.parent.popLayer.alert('同一角色不能有重复的用户','WARNING');","line":101,"character":65,"a":",","reason":"Missing space after ','."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"        type:\"POST\",","line":110,"character":14,"a":":","reason":"Missing space after ':'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"        url:\"/mizar/index.php?r=User/CheckUserName\",","line":111,"character":13,"a":":","reason":"Missing space after ':'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"        dataType:\"json\",","line":112,"character":18,"a":":","reason":"Missing space after ':'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"        data:{\"username\":opStr},","line":113,"character":14,"a":":","reason":"Missing space after ':'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"        data:{\"username\":opStr},","line":113,"character":26,"a":":","reason":"Missing space after ':'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"        success:function(json){","line":114,"character":17,"a":":","reason":"Missing space after ':'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"        success:function(json){","line":114,"character":25,"a":"function","reason":"Missing space after 'function'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"        success:function(json){","line":114,"character":31,"a":")","reason":"Missing space after ')'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"            if(json.success){","line":115,"character":15,"a":"if","reason":"Missing space after 'if'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"            if(json.success){","line":115,"character":29,"a":")","reason":"Missing space after ')'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"            }else{","line":119,"character":14,"a":"}","reason":"Missing space after '}'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"            }else{","line":119,"character":18,"a":"else","reason":"Missing space after 'else'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"                window.parent.popLayer.alert(json.message,\"WARNING\");","line":120,"character":59,"a":",","reason":"Missing space after ','."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"        error:function(){","line":124,"character":15,"a":":","reason":"Missing space after ':'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"        error:function(){","line":124,"character":23,"a":"function","reason":"Missing space after 'function'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"        error:function(){","line":124,"character":25,"a":")","reason":"Missing space after ')'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"            window.parent.popLayer.alert(\"验证用户名正确性失败,请再次提交\",\"ERROR\");","line":125,"character":61,"a":",","reason":"Missing space after ','."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"function changeShow(){","line":134,"character":22,"a":")","reason":"Missing space after ')'."}
+{"id":"(error)","raw":"Too many var statements.","evidence":"    var boss2 = document.getElementById('boss2');","line":136,"character":9,"reason":"Too many var statements."}
+{"id":"(error)","raw":"Use '{a}' to compare with '{b}'.","evidence":"    if (document.getElementById('isForever2').checked == true){","line":139,"character":55,"a":"===","b":"true","reason":"Use '===' to compare with 'true'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"    if (document.getElementById('isForever2').checked == true){","line":139,"character":63,"a":")","reason":"Missing space after ')'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"        boss1.style.display='';","line":140,"character":28,"a":"display","reason":"Missing space after 'display'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"        boss1.style.display='';","line":140,"character":29,"a":"=","reason":"Missing space after '='."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"        boss2.style.display='';","line":141,"character":28,"a":"display","reason":"Missing space after 'display'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"        boss2.style.display='';","line":141,"character":29,"a":"=","reason":"Missing space after '='."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"    }else {","line":142,"character":6,"a":"}","reason":"Missing space after '}'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"        boss1.style.display='none';","line":143,"character":28,"a":"display","reason":"Missing space after 'display'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"        boss1.style.display='none';","line":143,"character":29,"a":"=","reason":"Missing space after '='."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"        boss2.style.display='none';","line":144,"character":28,"a":"display","reason":"Missing space after 'display'."}
+{"id":"(error)","raw":"Missing space after '{a}'.","evidence":"        boss2.style.display='none';","line":144,"character":29,"a":"=","reason":"Missing space after '='."}
+{"id":"(error)","raw":"'{a}' is not defined.","evidence":"    var result = checkEmptyByIds(selectArr, true);","line":79,"character":18,"a":"checkEmptyByIds","reason":"'checkEmptyByIds' is not defined."}
+{"id":"(error)","raw":"'{a}' is not defined.","evidence":"suggestByIds(selectArr);","line":151,"character":1,"a":"suggestByIds","reason":"'suggestByIds' is not defined."}
+{"id":"(error)","raw":"'{a}' is defined but never used.","evidence":"function changeShow(){","line":134,"character":20,"a":"changeShow","reason":"'changeShow' is defined but never used."}

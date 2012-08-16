@@ -15,13 +15,13 @@
     commander
         .version("0.0.1")
         .option("-c --config <string>", "Configuration file")
-        .option("-s --src <string>", "Source to be check, file or dir")
+        .option("-s --source <string>", "Source to be check, file or dir")
         
     
     var parse = function(commandArgu) {
         commander.parse(commandArgu);
         if(commander.config) {
-
+            
         }
         
         console.log(commandArgu);
