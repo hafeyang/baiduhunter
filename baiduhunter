@@ -5,9 +5,10 @@ var fs = require("fs"),
     commander = require("./lib/commander"),
     config = require("./conf/cfg"),
     path = require("path"),
+    _ = require("./lib/underscore"),
     fileNameFilter = null, fileExtFilter = null,
-    argu = require("./module/arguments"),
-    files = [];
+    template = _.template("./conf/report.template"),
+    files = [], output = {};
 
 // {{{ commander.js处理命令行参数
 /* 
@@ -56,7 +57,7 @@ function processHTML(fileName) {
     var script = "", html, matches,
         ltBegin = 0, gtBegin = 0,
         endScriptTag = 0, nlNumber = 0,
-        htmlFragment = "";
+        htmlFragment = "", nlFragment;
     if(fileName.indexOf(".html") === -1 || fileName.indexOf(".htm") === -1) {
         return script;
     }
@@ -65,7 +66,8 @@ function processHTML(fileName) {
     while(ltBegin !== -1) {
         gtBegin = html.indexOf(">", ltBegin);
         htmlFragment = html.substring(endScriptTag, gtBegin + 2)
-        nlNumber = htmlFragment.match(/\n/gm).length;
+        nlFragment = htmlFragment.match(/\n/gm);
+        nlNumber = nlFragment && nlFragment.length;
         for(var i = 0; i < nlNumber; i++) {
             script += "\n";
         }
@@ -91,9 +93,10 @@ function beginHint() {
 
             for(var j = 0; j < errors.length; j++) {
                 var error = errors[j];
-                console.log(JSON.stringify(error));
+                console.log(error);
             }
         }
     });
+    tem
 }
 beginHint();
