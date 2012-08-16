@@ -43,7 +43,6 @@ function recursiveFindAllFile(accm, dir) {
         } else {
             totalFiles++;
             if(fileExtFilter.test(pathName) && !fileNameFilter.test(pathName)) {
-                console.log(pathName);
                 accm.push(pathName);    
             }
         }
@@ -53,6 +52,7 @@ if(commander.src) {
     var templateHTML = fs.readFileSync("./conf/tpl/report.template", "utf-8");
     template = _.template(templateHTML);
     recursiveFindAllFile(files, commander.src);
+    console.log("文件总数：" + totalFiles);
 }
 // }}}
 // {{{ 处理HTML文件的代码 processHTML
@@ -107,6 +107,7 @@ function beginHint() {
                 errors = out.errors;
             classifyErrors(tplObj, errors);
         }
+        console.log("error: " + tplObj.error + " warning: " + tplObj.warning + " ignored: " + tplObj.ignored + ". file: " + val);
         output.files.push(tplObj);
     });
     return output;
@@ -145,6 +146,7 @@ function toReport() {
     var result = beginHint(),
         reportHTML = template(result);
     fs.writeFileSync("./report.html", reportHTML, "utf-8");
+    console.log("过滤后检查文件数：" + files.length);
     console.log("生成文件路径：" + path.resolve("./report.html"));
 }
 toReport();
