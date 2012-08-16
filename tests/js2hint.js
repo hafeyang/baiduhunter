@@ -1,7 +1,11 @@
 (function(){
-	"use strict";
-    var abc ="";
-    var cd="";
-    xxx();
-    $(function(){});
+
+	/*console.log("abc")*/
+
+	//debugger;
+	console.log("abc");  
+	/*
+	*	debugger;
+	*/
+	debugger;
 })();

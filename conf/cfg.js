@@ -22,7 +22,6 @@ module.exports={
         "My97DatePicker",
         "ZeroClipboard",
         "jqGrid",
-        "noah",
         "\/data"
      ],
     "hint":{  //hint的配置项，详见http://www.jshint.com/docs/
