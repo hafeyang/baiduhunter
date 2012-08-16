@@ -8,7 +8,8 @@ var fs = require("fs"),
     cc = require("./customcheck"),
     _ = require("./lib/underscore"),
     fileNameFilter = null, fileExtFilter = null,
-    template, files = [], totalFiles = 0;
+    template, files = [], totalFiles = 0,
+    reportName;
 
 var output = {
     error: 0,
@@ -51,6 +52,23 @@ function recursiveFindAllFile(accm, dir) {
 if(commander.src) {
     var templateHTML = fs.readFileSync("./conf/tpl/report.template", "utf-8");
     template = _.template(templateHTML);
+    reportName = path.resolve(commander.src);
+    try {
+        var version = fs.readFileSync(reportName + "/version", "utf-8");
+    } catch (e) {
+
+    }
+    /*
+    if(fs.existsSync(reportName + "/version")) {
+        var version = fs.readFileSync(reportName + "/version", "utf-8");
+        console.log(version);
+    }*/
+    reportName = reportName.substring(reportName.lastIndexOf("/") + 1);
+    if(version) {
+        reportName += "-" + version.replace(/\./gi, "_");
+    }
+    console.log(reportName);
+
     recursiveFindAllFile(files, commander.src);
     console.log("文件总数：" + totalFiles);
 }
@@ -99,7 +117,6 @@ function beginHint() {
             scripts = afterProcessHTML.script;
             if(!cc.check(afterProcessHTML.html, true)) {
                 classifyErrors(tplObj, cc.error());
-                //console.log(cc.error());
             }
         } else {
             scripts = fs.readFileSync(val, "utf-8");
@@ -151,8 +168,8 @@ function classifyErrors(tplObj, errors) {
 function toReport() {
     var result = beginHint(),
         reportHTML = template(result);
-    fs.writeFileSync("./report.html", reportHTML, "utf-8");
+    fs.writeFileSync(reportName, reportHTML, "utf-8");
     console.log("过滤后检查文件数：" + files.length);
-    console.log("生成文件路径：" + path.resolve("./report.html"));
+    console.log("生成文件路径：" + path.resolve("./" + reportName+ ".html"));
 }
 toReport();

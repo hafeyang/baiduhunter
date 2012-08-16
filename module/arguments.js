@@ -16,12 +16,12 @@
         .version("0.0.1")
         .option("-c --config <string>", "Configuration file")
         .option("-s --source <string>", "Source to be check, file or dir")
+        .option("-d", "switch of debug flag");
         
     
     var parse = function(commandArgu) {
         commander.parse(commandArgu);
         if(commander.config) {
-            
         }
         
         console.log(commandArgu);
