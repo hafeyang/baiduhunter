@@ -7,9 +7,16 @@ var fs = require("fs"),
     path = require("path"),
     _ = require("./lib/underscore"),
     fileNameFilter = null, fileExtFilter = null,
-    template = _.template("./conf/report.template"),
-    files = [], output = {};
+    template, files = [];
 
+var output = {
+    error: 0,
+    warning: 0,
+    ignored: 0,
+    total: 0,
+    time: new Date().toLocaleString(),
+    files: []
+};
 // {{{ commander.js处理命令行参数
 /* 
  * 解析命令行参数
@@ -40,6 +47,8 @@ function recursiveFindAllFile(accm, dir) {
     });
 }
 if(commander.src) {
+    var templateHTML = fs.readFileSync("./conf/tpl/report.template", "utf-8");
+    template = _.template(templateHTML);
     recursiveFindAllFile(files, commander.src);
 }
 // }}}
@@ -81,22 +90,54 @@ function processHTML(fileName) {
 // }}}
 function beginHint() {
     files.forEach(function(val, index, arr) {
-        var scripts = null;
+        var scripts = null, tplObj = {
+            fileName: val
+        };
         if(val.indexOf(".html") !== -1) {
             scripts = processHTML(val);
         } else {
             scripts = fs.readFileSync(val, "utf-8");
         }
-        if(!jshint(scripts, config.hint, config.global)) {
+        if(scripts !== "" && !jshint(scripts, config.hint, config.global)) {
             var out = jshint.data(),
                 errors = out.errors;
-
-            for(var j = 0; j < errors.length; j++) {
-                var error = errors[j];
-                console.log(error);
-            }
+            tplObj.errors = classifyErrors(errors);
         }
+        output.files.push(tplObj);
     });
-    tem
+    return output;
 }
-beginHint();
+function classifyErrors(errors) {
+    var i, errLength, 
+        errorFilter = config.errordef;
+    for(i = 0, length = errors.length; i < length; i++) {
+        error = errors[i];
+        if(!!error) {
+            errors[i].id = "error";
+            for(key in errorFilter) {
+                if(error.reason.indexOf(key) > -1) {
+                    error.id = errorFilter[key];
+                    break;
+                }
+            }
+            if(error.id === "warning") {
+                output.warning++;
+            }
+            if(error.id === "error") {
+                output.error++;
+            }
+            if(error.id === "ignore") {
+                output.ignored++;
+            }
+            output.total++;
+        }
+    }
+
+    return errors;
+}
+function toReport() {
+    var result = beginHint();
+        reportHTML = template(result);
+    fs.writeFileSync("./report.html", reportHTML, "utf-8");
+}
+toReport();
