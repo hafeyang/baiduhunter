@@ -120,7 +120,7 @@ function classifyErrors(tplObj, errors) {
         if(!!error) {
             errors[i].level = "error";
             for(key in errorFilter) {
-                if(error.reason.indexOf(key) > -1) {
+                if(error.raw.indexOf(key) > -1) {
                     error.level = errorFilter[key];
                     break;
                 }
