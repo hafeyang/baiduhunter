@@ -107,8 +107,10 @@ function processHTML(fileName) {
 }
 // }}}
 function beginHint() {
-    files.forEach(function(val, index, arr) {
-        var scripts = null, tplObj = {
+    var i, length;
+    for(i = 0, length = files.length; i < length; i++) {
+    //files.forEach(function(val, index, arr) {
+        var val = files[i], scripts = null, tplObj = {
             error: 0, warning: 0, ignored: 0,
             fileName: val, errors: []
         },
@@ -125,14 +127,15 @@ function beginHint() {
                 classifyErrors(tplObj, cc.error());
             }
         }
-        if(scripts !== "" && !jshint(scripts, config.hint, config.global)) {
+        if(scripts.trim() !== "" && !jshint(scripts, config.hint, config.global)) {
             var out = jshint.data(),
                 errors = out.errors;
             classifyErrors(tplObj, errors);
         }
         console.log("error: " + tplObj.error + " warning: " + tplObj.warning + " ignored: " + tplObj.ignored + ". file: " + val);
         output.files.push(tplObj);
-    });
+    }
+    // });
     return output;
 }
 function classifyErrors(tplObj, errors) {

@@ -20,8 +20,15 @@
         
     
     var parse = function(commandArgu) {
+        var configPath = DEFAULT_CONFIG_PATH;
         commander.parse(commandArgu);
         if(commander.config) {
+            if(/\.js$/i.test(commander.config)) {
+                configPath = commander.config;
+            } else {
+                console.log("你输入的配置文件路径不正确");
+                process.exit(1);
+            }
         }
         
         console.log(commandArgu);
