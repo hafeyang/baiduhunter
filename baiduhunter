@@ -91,6 +91,7 @@ function processHTML(fileName) {
 function beginHint() {
     files.forEach(function(val, index, arr) {
         var scripts = null, tplObj = {
+            error: 0, warning: 0, ignored: 0,
             fileName: val
         };
         if(val.indexOf(".html") !== -1) {
@@ -101,13 +102,13 @@ function beginHint() {
         if(scripts !== "" && !jshint(scripts, config.hint, config.global)) {
             var out = jshint.data(),
                 errors = out.errors;
-            tplObj.errors = classifyErrors(errors);
+            classifyErrors(tplObj, errors);
         }
         output.files.push(tplObj);
     });
     return output;
 }
-function classifyErrors(errors) {
+function classifyErrors(tplObj, errors) {
     var i, errLength, 
         errorFilter = config.errordef;
     for(i = 0, length = errors.length; i < length; i++) {
@@ -122,18 +123,21 @@ function classifyErrors(errors) {
             }
             if(error.id === "warning") {
                 output.warning++;
+                tplObj.warning++;
             }
             if(error.id === "error") {
                 output.error++;
+                tplObj.error++;
             }
             if(error.id === "ignore") {
+                output.ignored++;
                 output.ignored++;
             }
             output.total++;
         }
     }
 
-    return errors;
+    tplObj.errors = errors;
 }
 function toReport() {
     var result = beginHint();
