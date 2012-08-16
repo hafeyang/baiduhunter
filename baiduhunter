@@ -6,6 +6,7 @@ var fs = require("fs"),
     config = require("./conf/cfg"),
     path = require("path"),
     fileNameFilter = null, fileExtFilter = null,
+    argu = require("./module/arguments"),
     files = [];
 
 // {{{ commander.js处理命令行参数
@@ -91,7 +92,6 @@ function beginHint() {
             for(var j = 0; j < errors.length; j++) {
                 var error = errors[j];
                 console.log(JSON.stringify(error));
-                //console.log(error.line + ": " + error.character);
             }
         }
     });
