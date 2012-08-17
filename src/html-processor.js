@@ -1,5 +1,11 @@
 /*
+ *
  * 用于抓取html页面中的JS代码
+ * Usage:
+ * var htmlprocessor = require("./src/html-processor");
+ * if(htmlprocessor.scratchJS(htmlString)) {
+ *      var js = htmlprocessor.scripts();
+ * }
  * by ouzhencong(ClarenceAu@github) 2012-08-17
  */
 (function() {
@@ -8,7 +14,7 @@
 
     function scratchJS(html) {
         var lines = html.split(/\n/gi), i, length, 
-            find = false;
+            find = false, hasScript = false;
         for(i = 0, length = lines.length; i < length; i++) {
             if(!find) {
                 data.scripts += "\n";
@@ -24,6 +30,10 @@
                 data.scripts += lines[i] + "\n";
             }
         }
+        if(data.scripts.trim() !== "") {
+            hasScript = true;
+        }
+        return hasScript;
     }
 
     function scripts() {
