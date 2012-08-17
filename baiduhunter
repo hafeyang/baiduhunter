@@ -53,16 +53,9 @@ if(commander.src) {
     var templateHTML = fs.readFileSync("./conf/tpl/report.template", "utf-8");
     template = _.template(templateHTML);
     reportName = path.resolve(commander.src);
-    try {
+    if(path.existsSync(reportName + "/version")) {
         var version = fs.readFileSync(reportName + "/version", "utf-8");
-    } catch (e) {
-
     }
-    /*
-    if(fs.existsSync(reportName + "/version")) {
-        var version = fs.readFileSync(reportName + "/version", "utf-8");
-        console.log(version);
-    }*/
     reportName = reportName.substring(reportName.lastIndexOf("/") + 1);
     if(version) {
         reportName += "-" + version.replace(/\./gi, "_").replace(/\n/, "");
