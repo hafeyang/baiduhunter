@@ -1,18 +1,36 @@
-var fs = require("fs");
-function processHTML(fileName) {
-    var script = "", html, matches,
-        ltBegin = 0, gtBegin = 0,
-        endScriptTag = 0;
-    if(fileName.indexOf(".html") === -1 || fileName.indexOf(".htm") === -1) {
-        return script;
+/*
+ * 用于抓取html页面中的JS代码
+ * by ouzhencong(ClarenceAu@github) 2012-08-17
+ */
+(function() {
+    var fs = require("fs"),
+        data = { html: "", scripts: "" };
+
+    function scratchJS(html) {
+        var lines = html.split(/\n/gi), i, length, 
+            find = false;
+        for(i = 0, length = lines.length; i < length; i++) {
+            if(!find) {
+                data.scripts += "\n";
+            }
+            if(/^.*<script.*/.test(lines[i])) {
+                if(!/<\/script>/.test(lines[i])) {
+                    find = true;
+                }
+            } else if(find && /<\/script>/.test(lines[i])) {
+                data.scripts += "\n";
+                find = false;
+            } else if(find) {
+                data.scripts += lines[i] + "\n";
+            }
+        }
     }
-    html = fs.readFileSync(fileName, "utf-8");
-    ltBegin = html.indexOf("<script", ltBegin);
-    while(ltBegin !== -1) {
-        gtBegin = html.indexOf(">", ltBegin);
-        endScriptTag = html.indexOf("</script>", gtBegin);
-        script += html.substring(gtBegin + 1, endScriptTag).trim();
-        ltBegin = html.indexOf("<script", ltBegin + 1);
+
+    function scripts() {
+        return data.scripts;
     }
-    return script;
-}
+
+    exports.scratchJS = scratchJS;
+    exports.scripts = scripts;
+
+})();

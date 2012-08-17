@@ -75,7 +75,7 @@ if(commander.src) {
  * @return {string} 从文件中提取出来的JavaScript代码，如果没有就返回空字符串
  */
 function processHTML(fileName) {
-    var script = "", html, matches,
+    var script = "", html,
         ltBegin = 0, gtBegin = 0,
         endScriptTag = 0, nlNumber = 0,
         htmlFragment = "", nlFragment;
