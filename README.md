@@ -24,4 +24,6 @@ jshint提供的功能:静态检查单一文件
 
 node baiduhunter.js  -s /folder
 
-生成report.html
+
+for file in `ls ../huntermodules/`; do if [ -d "../huntermodules/$file" ]; then node baiduhunter -s "../huntermodules/$file";fi;done
+
