@@ -24,8 +24,8 @@
         if(dirPath) {
             findAllFiles(dirPath);
         }
-        console.log("扫描出文件总数：" + totalFileCount);
-        console.log("符合条件文件总数：" + files.length);
+        console.log("total files: " + totalFileCount);
+        console.log("files to be scanned: " + files.length);
         return files;
     };
 

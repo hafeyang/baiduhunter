@@ -325,7 +325,7 @@ function openwindow(title, id, type)
     <tr><td class="text result_PASS">
             <%= index+1 %>&nbsp;
             <a OnClick="javascript:toggle('file_<%= index %>');"><%- obj.fileName %></a>
-            <span style="float: right;">error: <%- obj.error %>&nbsp;warning: <%- obj.warning %>&nbsp;ignored: <%- obj.ignored %></span>
+            <span style="float: right;">error: <%- obj.stats.error %>&nbsp;warning: <%- obj.stats.warning %>&nbsp;ignored: <%- obj.stats.ignored %></span>
     </td></tr>
 </table>
 <table class="separator"><tr><td></td></tr></table>
