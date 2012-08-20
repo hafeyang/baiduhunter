@@ -130,5 +130,6 @@ module.exports={
         "top.control":"warning",
         "timestamp missed":"warning",
         "Missing space after": "warning"
-    }
+    },
+    minline: 10        // 定义最小的扫描行数，当文件的行数小于这个值时，不对文件进行检查，避免检查经过压缩的JS文件
 };

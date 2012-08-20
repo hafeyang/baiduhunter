@@ -7,10 +7,11 @@
     var hint = require("../lib/jshint").JSHINT,
         data = { errors: [] };
 
-    function check(scripts, options, global, minline) {
+    function check(filename, scripts, options, global, minline) {
         var lineNum = scripts.match(/\n/gi),
             result = true;
         if(minline && lineNum < minline) {
+            console.log("skip file " + filename);
             return true;
         }
         

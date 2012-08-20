@@ -35,7 +35,7 @@ var fs = require("fs"),
             scripts = fileText;
         }
         // use jshint to scan javascirpt code
-        if(!hchecker.check(scripts, global.conf.hint, global.conf.global)) {
+        if(!hchecker.check(fileName, scripts, global.conf.hint, global.conf.global, global.conf.minline)) {
             errors = errors.concat(hchecker.errors());
         }
         // use custom checker to scan all html and javascirpt code
