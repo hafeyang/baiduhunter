@@ -22,7 +22,7 @@
     };
     
     commander
-        .version("0.1")
+        .version("0.1.1")
         .usage('[options] <dirToCheck>')
         .option("-c --config <string>", "Configuration file")
         .option("-d --debug", "switch of debug flag");
