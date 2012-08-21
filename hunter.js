@@ -8,6 +8,10 @@ var fs = require("fs"),
     report = require("./src/report"),
     global, allErrors = []; 
 
+if(!fs.existsSync) {
+    fs.existsSync = path.existsSync;
+}
+
 (function() {
     var i, length;
     global = argument.parse(process.argv);

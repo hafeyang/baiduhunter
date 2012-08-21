@@ -30,7 +30,8 @@
     
     var parse = function(commandArgu) {
         var configPath = DEFAULT_CONFIG_PATH,
-            dirToCheck, argLength = commandArgu.length;
+            dirToCheck, argLength = commandArgu.length,
+            verTmp;
         commander.parse(commandArgu);
         if(argLength === 2) {
             console.error("Usage: node hunter.js dirToCheck");
@@ -40,7 +41,7 @@
             if(/\.js$/i.test(commander.config)) {
                 configPath = path.resolve(commander.config);
                 // path.exists 与path.existsSync 方法在0.8版本中被移到了fs.exists fs.existsSync中
-                if(!path.existsSync(configPath)) {
+                if(!fs.existsSync(configPath)) {
                     console.error("配置文件不存在");
                     process.exit(1);
                 }
@@ -66,8 +67,12 @@
         }
 
         global.dirPath = path.resolve(dirToCheck);
-        if(path.existsSync(global.dirPath + "/version")) {
-            global.version = fs.readFileSync(global.dirPath + "/version", "utf-8").trim().replace(/\./gi, "_");
+        if(fs.existsSync(global.dirPath + "/version")) {
+            verTmp = fs.readFileSync(global.dirPath + "/version", "utf-8").trim();
+            global.version = /^[^\d\.]*([\d\.]*)/.exec(verTmp)[1].replace(/\./gi, "_");
+        } else {
+            global.version = "undefined";
+            console.error("Warning! version文件不存在！");
         }
         return global;
     };
