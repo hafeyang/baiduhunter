@@ -10,7 +10,7 @@
     function check(filename, scripts, options, global, minline) {
         var lineNum = scripts && scripts.match(/\n/gi),
             result = true;
-        if(minline && lineNum && lineNum < minline) {
+        if((minline && lineNum && lineNum < minline) || !scripts) {
             console.log("skip file " + filename);
             return true;
         }

@@ -10,7 +10,7 @@
  */
 (function() {
     var fs = require("fs"),
-        data = { html: "", scripts: "" };
+        data = { html: "" };
 
     function scratchJS(html) {
         var lines = html.split(/\n/gi), i, length, 

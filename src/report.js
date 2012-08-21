@@ -14,7 +14,7 @@
         path = require("path"),
         _ = require("../lib/underscore"),
         moduleFileName = module.filename,
-        DEFAULT_TPL_LOCATION = moduleFileName.substring(0, moduleFileName.indexOf("src")) + "conf/tpl/report.template";
+        DEFAULT_TPL_LOCATION = moduleFileName.substring(0, moduleFileName.indexOf("src")) + "conf/report.template";
 
     function generate(fileName, version, allErrors) {
         var template = _.template(fs.readFileSync(DEFAULT_TPL_LOCATION, "utf-8")),
