@@ -30,7 +30,8 @@
     
     var parse = function(commandArgu) {
         var configPath = DEFAULT_CONFIG_PATH,
-            dirToCheck, argLength = commandArgu.length;
+            dirToCheck, argLength = commandArgu.length,
+            verTmp;
         commander.parse(commandArgu);
         if(argLength === 2) {
             console.error("Usage: node hunter.js dirToCheck");
@@ -67,7 +68,10 @@
 
         global.dirPath = path.resolve(dirToCheck);
         if(path.existsSync(global.dirPath + "/version")) {
-            global.version = fs.readFileSync(global.dirPath + "/version", "utf-8").trim().replace(/\./gi, "_");
+            verTmp = fs.readFileSync(global.dirPath + "/version", "utf-8").trim();
+            global.version = /^[^\d\.]*([\d\.]*)/.exec(verTmp)[1].replace(/\./gi, "_");
+        } else {
+            console.error("Warning! version文件不存在！");
         }
         return global;
     };
