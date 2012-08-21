@@ -8,9 +8,9 @@
         data = { errors: [] };
 
     function check(filename, scripts, options, global, minline) {
-        var lineNum = scripts.match(/\n/gi),
+        var lineNum = scripts && scripts.match(/\n/gi),
             result = true;
-        if(minline && lineNum < minline) {
+        if(minline && lineNum && lineNum < minline) {
             console.log("skip file " + filename);
             return true;
         }

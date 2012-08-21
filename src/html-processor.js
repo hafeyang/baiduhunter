@@ -14,23 +14,25 @@
 
     function scratchJS(html) {
         var lines = html.split(/\n/gi), i, length, 
-            find = false, hasScript = false;
+            find = false, hasScript = false,
+            scripts = "";
         for(i = 0, length = lines.length; i < length; i++) {
             if(!find) {
-                data.scripts += "\n";
+                scripts += "\n";
             }
             if(/^.*<script.*/.test(lines[i])) {
                 if(!/<\/script>/.test(lines[i])) {
                     find = true;
                 }
             } else if(find && /<\/script>/.test(lines[i])) {
-                data.scripts += "\n";
+                scripts += "\n";
                 find = false;
             } else if(find) {
-                data.scripts += lines[i] + "\n";
+                scripts += lines[i] + "\n";
             }
         }
-        if(data.scripts.trim() !== "") {
+        if(scripts.trim() !== "") {
+            data.scripts = scripts;
             hasScript = true;
         }
         return hasScript;
