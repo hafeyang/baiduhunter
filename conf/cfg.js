@@ -116,18 +116,17 @@ module.exports={
     },
     errordef:{ //定义错误级别，在生成报表前可以过滤，调整某些错误的级别,级别有error,warning,ignore
         "Unsafe character":"warining",
-        "Mixed spaces and tabs":"ignore",
         "Too many var statements":"warning",
         "Insecure":"warning",
         "to compare with":"ignore",
         "Expected":" warning",
         "Unescaped":" warning",
+        "Expected":" warning",
         "Missing semicolon":"warning",
         "console":"error",
         "top.control":"warning",
         "timestamp missed":"warning",
-        'Unexpected space':'ignore',
-        'Missing space':'ignore'
+        'Unexpected space':'ignore'
     },
     minline: 10        // 定义最小的扫描行数，当文件的行数小于这个值时，不对文件进行检查，避免检查经过压缩的JS文件
 };
