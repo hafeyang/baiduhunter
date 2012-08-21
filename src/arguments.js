@@ -71,6 +71,7 @@
             verTmp = fs.readFileSync(global.dirPath + "/version", "utf-8").trim();
             global.version = /^[^\d\.]*([\d\.]*)/.exec(verTmp)[1].replace(/\./gi, "_");
         } else {
+            global.version = "undefined";
             console.error("Warning! version文件不存在！");
         }
         return global;
