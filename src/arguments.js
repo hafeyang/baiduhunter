@@ -41,7 +41,7 @@
             if(/\.js$/i.test(commander.config)) {
                 configPath = path.resolve(commander.config);
                 // path.exists 与path.existsSync 方法在0.8版本中被移到了fs.exists fs.existsSync中
-                if(!path.existsSync(configPath)) {
+                if(!fs.existsSync(configPath)) {
                     console.error("配置文件不存在");
                     process.exit(1);
                 }
@@ -67,7 +67,7 @@
         }
 
         global.dirPath = path.resolve(dirToCheck);
-        if(path.existsSync(global.dirPath + "/version")) {
+        if(fs.existsSync(global.dirPath + "/version")) {
             verTmp = fs.readFileSync(global.dirPath + "/version", "utf-8").trim();
             global.version = /^[^\d\.]*([\d\.]*)/.exec(verTmp)[1].replace(/\./gi, "_");
         } else {
